@@ -30,6 +30,15 @@ app.post("/api/v1/greetings", (req, res) => {
   const greeting = new Greeting(id.toString(), req.body.greeting);
   greetings.push(greeting);
 });
+
+app.get("/api/v1/greetings/:id", (req, res) => {
+  const id = req.params.id;
+  //const greetingWithId = greetings.find(greeting => greeting.id === id);
+  console.log(id);
+  console.log(greetings);
+  
+  
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
