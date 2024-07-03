@@ -48,3 +48,20 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+function handleFormSubmit(event: Event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+  const nameInput = document.getElementById('greetingInput') as HTMLInputElement;
+  const nameValue = nameInput.value;
+  const requestOptions = { method: 'POST', headers: { 'Content-Type': 'application/json'}}
+  fetch("http://localhost:3000/api/v1/greetings", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log({ data });
+})
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('greetingsForm') as HTMLFormElement;
+  form.addEventListener('submit', handleFormSubmit);
+});

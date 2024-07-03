@@ -3,6 +3,7 @@ import cors from "cors";
 const app = express();
 const port = 3000;
 app.use(cors());
+app.use(express.json())
 let greetings = [];
 
 class Greeting {
@@ -20,7 +21,11 @@ app.get("/status", (req, res) => {
 
 app.get("/api/v1/greetings", (req, res) => {
   res.json(greetings);
-}),
+});
+
+app.post('/api/v1/greetings', (req, res)=>{
+  console.log(req.body);
+})
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
