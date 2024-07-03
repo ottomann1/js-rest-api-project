@@ -53,12 +53,19 @@ function handleFormSubmit(event: Event) {
   event.preventDefault(); // Prevent the default form submission behavior
   const nameInput = document.getElementById('greetingInput') as HTMLInputElement;
   const nameValue = nameInput.value;
-  const requestOptions = { method: 'POST', headers: { 'Content-Type': 'application/json'}}
+  const requestOptions = { 
+    method: 'POST', 
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({ greeting: nameValue })
+  }
   fetch("http://localhost:3000/api/v1/greetings", requestOptions)
     .then((response) => response.json())
     .then((data) => {
       console.log({ data });
-})
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
