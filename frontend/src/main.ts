@@ -56,7 +56,7 @@ function handleFormSubmit(event: Event) {
   const requestOptions = { 
     method: 'POST', 
     headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({ greeting: nameValue })
+    body: JSON.stringify(nameValue)
   }
   fetch("http://localhost:3000/api/v1/greetings", requestOptions)
     .then((response) => response.json())
