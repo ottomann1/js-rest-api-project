@@ -12,17 +12,20 @@
     </header>
 
     <main>
-    <button id="myBtn">Add a new greeting</button>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+      <button id="myBtn">Add a new greeting</button>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          
+            <label for =greeting>greeting: </label>
+            <input type="text" id ="greeting" name="greeting">
+            <input type ="submit" value="Submit">
+          </form>
+        </div>
       </div>
-
-    </div> 
       <div id="greetingsDisplay">greetings display</div>
       <div></div>
     </main>
-    <script type="module" src="/src/main.ts"></script>
+    <script defer type="module" src="/src/main.ts"></script>
   </body>
 </html>
