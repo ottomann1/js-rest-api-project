@@ -4,7 +4,7 @@ const fetchGreetings = () => {
   fetch("http://localhost:3000/api/v1/greetings")
     .then((response) => response.json())
     .then((data) => {
-      console.log({ data });
+      console.log(data[1].greeting);
 
       const greetingsDisplay = document.getElementById(
         "greetingsDisplay"
@@ -12,9 +12,10 @@ const fetchGreetings = () => {
       if (data.length === 0) {
         greetingsDisplay.innerHTML = "No current greetings";
       } else {
-        data.value.forEach((greeting: string) => {
+        data.forEach((greeting) => {
+          console.log(greeting);
           const listItem = document.createElement("li");
-          listItem.textContent = greeting;
+          listItem.textContent = greeting.greeting;
           greetingsDisplay.appendChild(listItem);
         });
       }
@@ -51,24 +52,26 @@ window.onclick = function (event) {
 
 function handleFormSubmit(event: Event) {
   event.preventDefault(); // Prevent the default form submission behavior
-  const nameInput = document.getElementById('greetingInput') as HTMLInputElement;
+  const nameInput = document.getElementById(
+    "greetingInput"
+  ) as HTMLInputElement;
   const nameValue = nameInput.value;
-  const requestOptions = { 
-    method: 'POST', 
-    headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify(nameValue)
-  }
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ greeting: nameValue }),
+  };
   fetch("http://localhost:3000/api/v1/greetings", requestOptions)
     .then((response) => response.json())
     .then((data) => {
       console.log({ data });
     })
     .catch((error) => {
-      console.error('Error:', error);
+      console.error("Error:", error);
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('greetingsForm') as HTMLFormElement;
-  form.addEventListener('submit', handleFormSubmit);
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("greetingsForm") as HTMLFormElement;
+  form.addEventListener("submit", handleFormSubmit);
 });

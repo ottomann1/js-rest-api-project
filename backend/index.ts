@@ -3,8 +3,9 @@ import cors from "cors";
 const app = express();
 const port = 3000;
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 let greetings = [];
+let id = 0;
 
 class Greeting {
   id: string;
@@ -23,9 +24,12 @@ app.get("/api/v1/greetings", (req, res) => {
   res.json(greetings);
 });
 
-app.post('/api/v1/greetings', (req, res)=>{
+app.post("/api/v1/greetings", (req, res) => {
   console.log(req.body);
-})
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-  });
+  id++;
+  const greeting = new Greeting(id.toString(), req.body.greeting);
+  greetings.push(greeting);
+});
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
