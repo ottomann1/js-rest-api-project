@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 app.use(cors());
 app.use(express.json());
-let greetings = [{ id: "2" }, { id: "24" }, { id: "670" }];
+const greetings = [];
 let id = 0;
 
 class Greeting {
@@ -15,6 +15,8 @@ class Greeting {
     this.greeting = greeting;
   }
 }
+
+
 
 app.get("/status", (req, res) => {
   res.sendStatus(200);
@@ -36,6 +38,7 @@ app.get("/api/v1/greetings/:id", (req, res) => {
   const greetingWithId = greetings.find((greeting) => greeting.id === id);
   res.send(greetingWithId);
 });
+
 app.delete("/api/v1/greetings/:id", (req, res) => {
   const id = req.params.id;
   const index = greetings.findIndex((greeting) => greeting.id === id);
@@ -46,6 +49,7 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
     res.status(404).send({ error: "Greeting not found" });
   }
 });
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
