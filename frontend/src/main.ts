@@ -85,7 +85,7 @@ function handleUserFormSubmit(event: Event) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: nameValue }),
   };
-  fetch("http://localhost:3000/api/v1/user", requestOptions)
+  fetch("http://localhost:3000/api/v1/users", requestOptions)
     .then((response) => response.json())
     .then((data) => {
       console.log({ data });
