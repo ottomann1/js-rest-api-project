@@ -92,6 +92,7 @@ function handleUserFormSubmit(event: Event) {
   const emailValue = emailInput.value;
   const passwordValue = passwordInput.value;
   const birthDayValue = birthDayInput.value;
+  console.log(birthDayValue)
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
