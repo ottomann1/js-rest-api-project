@@ -97,7 +97,7 @@ function handleUserFormSubmit(event: Event) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const greetingsForm = document.getElementById("greetingsForm") as HTMLFormElement;
-  greetingsForm.addEventListener("greetingSubmit", handleGreetingFormSubmit);
+  greetingsForm.addEventListener("submit", handleGreetingFormSubmit);
   const userForm = document.getElementById("userForm") as HTMLFormElement;
-  userForm.addEventListener("userSubmit", handleUserFormSubmit);
+  userForm.addEventListener("submit", handleUserFormSubmit);
 });
