@@ -76,12 +76,14 @@ app.post("/api/v1/users", (req, res) => {
 app.post("/auth/login", (req, res) => {
   const user = users.find((user) => 
     user.email == req.body.email && user.password == req.body.password)
-
-  const newId = v4().replaceAll('-', '');
-  uuids.push(newId);
-
-  console.log(user);
-  res.json(newId)
+  if(user){
+    const newId = v4().replaceAll('-', '');
+    uuids.push(newId);
+    res.json(newId)
+  }else{
+    res.status(401).json({ error: 'User not found' });
+  }
+  
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
