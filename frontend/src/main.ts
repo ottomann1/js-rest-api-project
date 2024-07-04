@@ -92,7 +92,7 @@ function handleUserFormSubmit(event: Event) {
   const emailValue = emailInput.value;
   const passwordValue = passwordInput.value;
   const birthDayValue = birthDayInput.value;
-  console.log(birthDayValue)
+  console.log(birthDayValue);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -113,11 +113,42 @@ function handleUserFormSubmit(event: Event) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const greetingsForm = document.getElementById(
-    "greetingsForm"
-  ) as HTMLFormElement;
-  greetingsForm.addEventListener("submit", handleGreetingFormSubmit);
-  const userForm = document.getElementById("userForm") as HTMLFormElement;
-  userForm.addEventListener("submit", handleUserFormSubmit);
-});
+function handleLogin(event: Event) {
+  event.preventDefault();
+
+  const emailInput = document.getElementById(
+    "loginEmailInput"
+  ) as HTMLInputElement;
+  const passwordInput = document.getElementById(
+    "loginPasswordInput"
+  ) as HTMLInputElement;
+
+  const emailValue = emailInput.value;
+  const passwordValue = passwordInput.value;
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: emailValue,
+      password: passwordValue,
+    }),
+  };
+  fetch("http://localhost:3000/auth/login", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log({ data });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+const greetingsForm = document.getElementById(
+  "greetingsForm"
+) as HTMLFormElement;
+greetingsForm.addEventListener("submit", handleGreetingFormSubmit);
+const userForm = document.getElementById("userForm") as HTMLFormElement;
+userForm.addEventListener("submit", handleUserFormSubmit);
+const loginForm = document.getElementById("loginForm") as HTMLFormElement;
+loginForm.addEventListener("submit", handleLogin);

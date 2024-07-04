@@ -10,6 +10,22 @@
   <body>
     <header>
       <h1>Greetings</h1>
+      <button id="loginButton">Login</button>
+      <div id="loginModal" class="modal">
+        <div class="modal-content">
+          <span id="loginClose" class="close">&times;</span>
+          <form id="loginForm">
+
+            <label for="loginEmailInput">email: </label>
+            <input
+              type="email"
+              id="loginEmailInput"
+              name="loginEmailInput"
+            />
+            <label for="loginPasswordInput">password: </label>
+            <input type="password" id="loginPasswordInput" name="loginPasswordInput" />
+            <input type="submit" value="Submit" />
+          </form>
     </header>
 
     <main>
@@ -43,6 +59,7 @@
             <input type="date" id="birthDayInput" name="birthDayInput" />
             <input type="submit" value="Submit" />
           </form>
+          
         </div>
       </div>
       <div id="greetingsDisplay">greetings display</div>
