@@ -7,7 +7,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 const greetings = [];
-let id = 0;
+let greetingId = 0;
 
 let userId = 0;
 const users = [];
@@ -22,6 +22,9 @@ class Greeting {
 
 const userSchema = z.object({
   username: z.string(),
+  email: z.string().email('Invalid e-mail format'),
+  password: z.string(),
+  birthday: z.string().date()
 });
 
 app.get("/status", (req, res) => {
@@ -34,8 +37,8 @@ app.get("/api/v1/greetings", (req, res) => {
 
 app.post("/api/v1/greetings", (req, res) => {
   console.log(req.body);
-  id++;
-  const greeting = new Greeting(id.toString(), req.body.greeting);
+  greetingId++;
+  const greeting = new Greeting(greetingId.toString(), req.body.greeting);
   greetings.push(greeting);
 });
 
@@ -57,11 +60,12 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
 });
 
 app.post("/api/v1/users", (req, res) => {
-  console.log(req.body);
+  
   userId++;
   const parsedUser = userSchema.parse(req.body);
-  const parsedUserWithId = { userId, ...parsedUser };
-
+  
+  const parsedUserWithId = { id:userId, ...parsedUser, role:["guest"] };
+  console.log(req.body);
   users.push(parsedUserWithId);
   res.json(users);
 });
