@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { z } from "zod";
+import {v4} from 'uuid'
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,8 @@ let greetingId = 0;
 
 let userId = 0;
 const users = [];
+
+const uuids = [];
 class Greeting {
   id: string;
   greeting: string;
@@ -69,6 +72,17 @@ app.post("/api/v1/users", (req, res) => {
   users.push(parsedUserWithId);
   res.json(users);
 });
+
+app.post("/auth/login", (req, res) => {
+  const user = users.find((user) => 
+    user.email == req.body.email && user.password == req.body.password)
+
+  const newId = v4().replaceAll('-', '');
+  uuids.push(newId);
+
+  console.log(user);
+  res.json(newId)
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
