@@ -2,8 +2,6 @@ const fetchGreetings = () => {
   fetch("http://localhost:3000/api/v1/greetings")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data[1].greeting);
-
       const greetingsDisplay = document.getElementById(
         "greetingsDisplay"
       ) as HTMLDivElement;
@@ -53,6 +51,21 @@ userSpan.onclick = function () {
 window.onclick = function (event) {
   if (event.target == userModal) {
     userModal.style.display = "none";
+  }
+};
+
+const loginModal = document.getElementById("loginModal") as HTMLDivElement;
+const loginBtn = document.getElementById("loginButton") as HTMLButtonElement;
+const loginSpan = document.getElementById("loginClose") as HTMLSpanElement;
+loginBtn.onclick = function () {
+  loginModal.style.display = "block";
+};
+loginSpan.onclick = function () {
+  loginModal.style.display = "none";
+};
+window.onclick = function (event) {
+  if (event.target == loginModal) {
+    loginModal.style.display = "none";
   }
 };
 
@@ -144,11 +157,13 @@ function handleLogin(event: Event) {
     });
 }
 
-const greetingsForm = document.getElementById(
-  "greetingsForm"
-) as HTMLFormElement;
-greetingsForm.addEventListener("submit", handleGreetingFormSubmit);
-const userForm = document.getElementById("userForm") as HTMLFormElement;
-userForm.addEventListener("submit", handleUserFormSubmit);
-const loginForm = document.getElementById("loginForm") as HTMLFormElement;
-loginForm.addEventListener("submit", handleLogin);
+document.addEventListener("DOMContentLoaded", () => {
+  const greetingsForm = document.getElementById(
+    "greetingsForm"
+  ) as HTMLFormElement;
+  greetingsForm.addEventListener("submit", handleGreetingFormSubmit);
+  const userForm = document.getElementById("userForm") as HTMLFormElement;
+  userForm.addEventListener("submit", handleUserFormSubmit);
+  const loginForm = document.getElementById("loginForm") as HTMLFormElement;
+  loginForm.addEventListener("submit", handleLogin);
+});
