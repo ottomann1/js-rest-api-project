@@ -1,10 +1,6 @@
 import express from "express";
 import cors from "cors";
-import {z} from 'zod'
-
-
-
-
+import { z } from "zod";
 
 const app = express();
 const port = 3000;
@@ -14,7 +10,7 @@ const greetings = [];
 let id = 0;
 
 let userId = 0;
-const users = []
+const users = [];
 class Greeting {
   id: string;
   greeting: string;
@@ -25,8 +21,8 @@ class Greeting {
 }
 
 const userSchema = z.object({
-  username: z.string()
-})
+  username: z.string(),
+});
 
 app.get("/status", (req, res) => {
   res.sendStatus(200);
@@ -63,13 +59,12 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
 app.post("/api/v1/users", (req, res) => {
   console.log(req.body);
   userId++;
-  const parsedUser = userSchema.parse(req.body)
- const parsedUserWithId = { userId, ...parsedUser } 
-  //const user =  createUser(userId.toString(), parsedUser.username);
+  const parsedUser = userSchema.parse(req.body);
+  const parsedUserWithId = { userId, ...parsedUser };
 
   users.push(parsedUserWithId);
   res.json(users);
-})
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

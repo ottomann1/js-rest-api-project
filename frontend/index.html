@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <link rel="stylesheet" href="./src/style.css"/>
+    <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
     <header>
@@ -17,10 +17,10 @@
       <div id="greetingModal" class="modal">
         <div class="modal-content">
           <span id="greetingClose" class="close">&times;</span>
-          <form id ="greetingsForm">
+          <form id="greetingsForm">
             <label for="greetingInput">greeting: </label>
-            <input type="text" id ="greetingInput" name="greetingInput">
-            <input type ="submit" value="Submit">
+            <input type="text" id="greetingInput" name="greetingInput" />
+            <input type="submit" value="Submit" />
           </form>
         </div>
       </div>
@@ -28,10 +28,21 @@
       <div id="userModal" class="modal">
         <div class="modal-content">
           <span id="userClose" class="close">&times;</span>
-          <form id ="userForm">
+          <form id="userForm">
             <label for="usernameInput">username: </label>
-            <input type="text" id ="usernameInput" name="usernameInput">
-            <input type ="submit" value="Submit">
+            <input type="text" id="usernameInput" name="usernameInput" />
+            <label for="emailInput">email: </label>
+            <input
+              type="email"
+              id="emailInput"
+              pattern=".+@example\.com"
+              name="emailInput"
+            />
+            <label for="passwordInput">password: </label>
+            <input type="password" id="passwordInput" name="passwordInput" />
+            <label for="birthDayInput">birthday: </label>
+            <input type="date" id="birhDayInput" name="birthDayInput" />
+            <input type="submit" value="Submit" />
           </form>
         </div>
       </div>
