@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <link rel="stylesheet" href="./src/style.css"/>
   </head>
   <body>
     <header>
@@ -12,14 +13,25 @@
     </header>
 
     <main>
-      <button id="myBtn">Add a new greeting</button>
-      <div id="myModal" class="modal">
+      <button id="greetingBtn">Add a new greeting</button>
+      <div id="greetingModal" class="modal">
         <div class="modal-content">
-          <span class="close">&times;</span>
+          <span id="greetingClose" class="close">&times;</span>
           <form id ="greetingsForm">
             <label for="greetingInput">greeting: </label>
             <input type="text" id ="greetingInput" name="greetingInput">
-            <input type ="submit" value="Submit">
+            <input type ="greetingSubmit" value="Submit">
+          </form>
+        </div>
+      </div>
+      <button id="userBtn">Register User</button>
+      <div id="userModal" class="modal">
+        <div class="modal-content">
+          <span id="userClose" class="close">&times;</span>
+          <form id ="userForm">
+            <label for="usernameInput">username: </label>
+            <input type="text" id ="usernameInput" name="usernameInput">
+            <input type ="userSubmit" value="Submit">
           </form>
         </div>
       </div>
