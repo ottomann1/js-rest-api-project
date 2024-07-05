@@ -46,21 +46,25 @@ const profileBtn = document.getElementById(
 const profileSpan = document.getElementById("profileClose") as HTMLSpanElement;
 profileBtn.onclick = function () {
   profileModal.style.display = "block";
-  const uuid = JSON.stringify(localStorage.getItem("user_uuid"));
+  const uuid = localStorage.getItem("user_uuid");
   const requestOptions = {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       "X-Authentication": `${uuid}`,
     },
   };
-  fetch(`http://localhost:3000/api/v1/users/${uuid}`, requestOptions)
+  fetch(`http://localhost:3000/api/v1/users/auth`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      const profileText = document.getElementById(
+      console.log(data);
+      
+      
+     const profileText = document.getElementById(
         "profileText"
       ) as HTMLParagraphElement;
-      profileText.innerText = data;
+      profileText.innerText = JSON.stringify(data);
+      
     });
 };
 profileSpan.onclick = function () {
