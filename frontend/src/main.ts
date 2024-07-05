@@ -187,10 +187,23 @@ function handleLogin(event: Event) {
     .then((data) => {
       console.log({ data });
       localStorage.setItem("user_uuid", JSON.stringify(data));
+      loggedinChecker()
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+const loggedinChecker = () => {
+  const loggedIn = localStorage.getItem("user_uuid");
+  if (loggedIn) {
+    loginBtn.style.display = "none";
+    profileBtn.style.display = "block"
+  }
+  else{
+    loginBtn.style.display = "block";
+    profileBtn.style.display = "none";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -202,9 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
   userForm.addEventListener("submit", handleUserFormSubmit);
   const loginForm = document.getElementById("loginForm") as HTMLFormElement;
   loginForm.addEventListener("submit", handleLogin);
-  const loggedIn = localStorage.getItem("user_uuid");
+  loggedinChecker();
 
-  if (loggedIn) {
-    loginBtn.style.display = "none";
-  }
+  
 });
