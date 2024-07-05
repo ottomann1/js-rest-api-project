@@ -46,7 +46,7 @@ const profileBtn = document.getElementById(
 const profileSpan = document.getElementById("profileClose") as HTMLSpanElement;
 profileBtn.onclick = function () {
   profileModal.style.display = "block";
-  const uuid = localStorage.getItem("user_uuid");
+  const uuid = JSON.stringify(localStorage.getItem("user_uuid"));
   const requestOptions = {
     method: "POST",
     headers: {
@@ -54,7 +54,7 @@ profileBtn.onclick = function () {
       "X-Authentication": `${uuid}`,
     },
   };
-  fetch(`localhost:3000/api/v1/users/`, requestOptions)
+  fetch(`http://localhost:3000/api/v1/users/${uuid}`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
       const profileText = document.getElementById(
