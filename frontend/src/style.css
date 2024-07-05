@@ -93,7 +93,7 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-  .modal{
+  .modal {
     background-color: #ffffff;
   }
 }
@@ -107,7 +107,7 @@ button:focus-visible {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: black
+  background-color: black;
 }
 
 /* Modal Content/Box */

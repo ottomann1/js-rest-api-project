@@ -58,13 +58,11 @@ profileBtn.onclick = function () {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      
-      
-     const profileText = document.getElementById(
+
+      const profileText = document.getElementById(
         "profileText"
       ) as HTMLParagraphElement;
       profileText.innerText = JSON.stringify(data);
-      
     });
 };
 profileSpan.onclick = function () {
@@ -204,4 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
   userForm.addEventListener("submit", handleUserFormSubmit);
   const loginForm = document.getElementById("loginForm") as HTMLFormElement;
   loginForm.addEventListener("submit", handleLogin);
+  const loggedIn = localStorage.getItem("user_uuid");
+
+  if (loggedIn) {
+    loginBtn.style.display = "none";
+  }
 });

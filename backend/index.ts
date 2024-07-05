@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { z } from "zod";
-import {v4} from 'uuid'
+import { v4 } from "uuid";
 
 const app = express();
 const port = 3000;
@@ -24,9 +24,9 @@ class Greeting {
 
 const userSchema = z.object({
   username: z.string(),
-  email: z.string().email('Invalid e-mail format'),
+  email: z.string().email("Invalid e-mail format"),
   password: z.string(),
-  birthday: z.string().date()
+  birthday: z.string().date(),
 });
 
 app.get("/status", (req, res) => {
@@ -42,7 +42,7 @@ app.post("/api/v1/greetings", (req, res) => {
   greetingId++;
   const greeting = new Greeting(greetingId.toString(), req.body.greeting);
   greetings.push(greeting);
-  res.json(greeting)
+  res.json(greeting);
 });
 
 app.get("/api/v1/greetings/:id", (req, res) => {
@@ -65,33 +65,36 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
 app.post("/api/v1/users", (req, res) => {
   userId++;
   const parsedUser = userSchema.parse(req.body);
-  const parsedUserWithId = { id:userId, ...parsedUser, role:["guest"], uuid: v4() };
+  const parsedUserWithId = {
+    id: userId,
+    ...parsedUser,
+    role: ["guest"],
+    uuid: v4(),
+  };
   users.push(parsedUserWithId);
   res.json(users);
 });
 
-app.get('/api/v1/users/auth', (req, res)=>{
-
-  const uuid = req.header('X-Authentication').replace(/^"|"$/g, '')
+app.get("/api/v1/users/auth", (req, res) => {
+  const uuid = req.header("X-Authentication").replace(/^"|"$/g, "");
   console.log(uuid);
-  
-  
-  
-  const user = users.find((user)=> user.uuid == uuid);
 
-  console.log('user', user);
-  res.json(user)
-})
+  const user = users.find((user) => user.uuid == uuid);
+
+  console.log("user", user);
+  res.json(user);
+});
 
 app.post("/auth/login", (req, res) => {
-  const user = users.find((user) => 
-    user.email == req.body.email && user.password == req.body.password)
-  if(user){
-    res.json(user.uuid)
-  }else{
-    res.status(401).json({ error: 'User not found' });
+  const user = users.find(
+    (user) => user.email == req.body.email && user.password == req.body.password
+  );
+  if (user) {
+    res.json(user.uuid);
+  } else {
+    res.status(401).json({ error: "User not found" });
   }
-})
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
