@@ -62,6 +62,13 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
   }
 });
 
+app.put('/api/v1/greetings/:id', (req, res)=>{
+  const id = req.params.id;
+  console.log(req.body);
+  const greeting = greetings.find((greeting)=>greeting.id==id);
+  res.json(greeting)
+})
+
 app.post("/api/v1/users", (req, res) => {
   userId++;
   const parsedUser = userSchema.parse(req.body);
@@ -95,6 +102,8 @@ app.post("/auth/login", (req, res) => {
     res.status(401).json({ error: "User not found" });
   }
 });
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
