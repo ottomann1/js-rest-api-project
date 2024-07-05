@@ -70,12 +70,16 @@ app.post("/api/v1/users", (req, res) => {
   res.json(users);
 });
 
-app.get('/api/v1/users/:uuid', (req, res)=>{
-  console.log(req.params.uuid)
-  const uuid = req.params.uuid
+app.get('/api/v1/users/auth', (req, res)=>{
+
+  const uuid = req.header('X-Authentication').replace(/^"|"$/g, '')
+  console.log(uuid);
+  
+  
+  
   const user = users.find((user)=> user.uuid == uuid);
 
-  console.log(user);
+  console.log('user', user);
   res.json(user)
 })
 
