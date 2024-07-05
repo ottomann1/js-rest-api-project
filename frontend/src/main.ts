@@ -1,5 +1,3 @@
-
-
 const fetchGreetings = () => {
   fetch("http://localhost:3000/api/v1/greetings")
     .then((response) => response.json())
@@ -38,6 +36,39 @@ greetingSpan.onclick = function () {
 window.onclick = function (event) {
   if (event.target == greetingModal) {
     greetingModal.style.display = "none";
+  }
+};
+
+const profileModal = document.getElementById("profileModal") as HTMLDivElement;
+const profileBtn = document.getElementById(
+  "profileButton"
+) as HTMLButtonElement;
+const profileSpan = document.getElementById("profileClose") as HTMLSpanElement;
+profileBtn.onclick = function () {
+  profileModal.style.display = "block";
+  const uuid = localStorage.getItem("user_uuid");
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authentication": `${uuid}`,
+    },
+  };
+  fetch(`localhost:3000/api/v1/users/`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      const profileText = document.getElementById(
+        "profileText"
+      ) as HTMLParagraphElement;
+      profileText.innerText = data;
+    });
+};
+profileSpan.onclick = function () {
+  profileModal.style.display = "none";
+};
+window.onclick = function (event) {
+  if (event.target == profileModal) {
+    profileModal.style.display = "none";
   }
 };
 
@@ -153,7 +184,7 @@ function handleLogin(event: Event) {
     .then((response) => response.json())
     .then((data) => {
       console.log({ data });
-      localStorage.setItem('user_uuid', JSON.stringify(data))
+      localStorage.setItem("user_uuid", JSON.stringify(data));
     })
     .catch((error) => {
       console.error("Error:", error);
