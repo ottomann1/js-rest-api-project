@@ -13,7 +13,6 @@ let greetingId = 0;
 let userId = 0;
 const users = [];
 
-const uuids = [];
 class Greeting {
   id: string;
   greeting: string;
@@ -63,28 +62,30 @@ app.delete("/api/v1/greetings/:id", (req, res) => {
 });
 
 app.post("/api/v1/users", (req, res) => {
-  
   userId++;
   const parsedUser = userSchema.parse(req.body);
-  
-  const parsedUserWithId = { id:userId, ...parsedUser, role:["guest"] };
-  console.log(req.body);
+  const parsedUserWithId = { id:userId, ...parsedUser, role:["guest"], uuid: v4() };
   users.push(parsedUserWithId);
   res.json(users);
 });
+
+app.get('api/v1/users/:id', (req, res)=>{
+  console.log(req.params.id)
+  const uuid = req.params.id
+  console.log(uuid);
+  res.status(200)
+})
 
 app.post("/auth/login", (req, res) => {
   const user = users.find((user) => 
     user.email == req.body.email && user.password == req.body.password)
   if(user){
-    const newId = v4()
-    uuids.push(newId);
-    res.json(newId)
+    res.json(user.uuid)
   }else{
     res.status(401).json({ error: 'User not found' });
   }
-  
 })
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
