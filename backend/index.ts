@@ -42,6 +42,7 @@ app.post("/api/v1/greetings", (req, res) => {
   greetingId++;
   const greeting = new Greeting(greetingId.toString(), req.body.greeting);
   greetings.push(greeting);
+  res.json(greeting)
 });
 
 app.get("/api/v1/greetings/:id", (req, res) => {
@@ -69,11 +70,13 @@ app.post("/api/v1/users", (req, res) => {
   res.json(users);
 });
 
-app.get('api/v1/users/:id', (req, res)=>{
-  console.log(req.params.id)
-  const uuid = req.params.id
-  console.log(uuid);
-  res.status(200)
+app.get('/api/v1/users/:uuid', (req, res)=>{
+  console.log(req.params.uuid)
+  const uuid = req.params.uuid
+  const user = users.find((user)=> user.uuid == uuid);
+
+  console.log(user);
+  res.json(user)
 })
 
 app.post("/auth/login", (req, res) => {
