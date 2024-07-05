@@ -77,7 +77,7 @@ app.post("/auth/login", (req, res) => {
   const user = users.find((user) => 
     user.email == req.body.email && user.password == req.body.password)
   if(user){
-    const newId = v4().replaceAll('-', '');
+    const newId = v4()
     uuids.push(newId);
     res.json(newId)
   }else{

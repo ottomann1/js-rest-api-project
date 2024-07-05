@@ -1,3 +1,5 @@
+
+
 const fetchGreetings = () => {
   fetch("http://localhost:3000/api/v1/greetings")
     .then((response) => response.json())
@@ -151,6 +153,7 @@ function handleLogin(event: Event) {
     .then((response) => response.json())
     .then((data) => {
       console.log({ data });
+      localStorage.setItem('user_uuid', JSON.stringify(data))
     })
     .catch((error) => {
       console.error("Error:", error);
